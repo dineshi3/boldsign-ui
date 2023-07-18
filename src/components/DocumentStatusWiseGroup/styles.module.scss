@@ -1,0 +1,23 @@
+.card {
+  .cardHeader {
+    background: #e9d8fd;
+    border-bottom: 1px solid #6b46c1;
+    padding: 10px 16px;
+
+    .headerText {
+      letter-spacing: 0.32px;
+      font-weight: 500;
+      color: #333842;
+    }
+  }
+  .viewAll {
+    margin: 12px 0px;
+    text-align: center;
+    
+    a {
+        font-size: 14px;
+        text-decoration: none;
+        color: #0565ff;
+    }
+  }
+}

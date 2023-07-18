@@ -1,0 +1,21 @@
+@import 'mixins';
+@import 'colors';
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.mainContainer {
+  padding: 32px 0px;
+  background-color: $bg-gray;
+}
+
+.flexCenter {
+  @include flexCenter;
+}
+
+.mantine-TextInput-label {
+  margin-bottom: 8px;
+}
