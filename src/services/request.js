@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 export const request = async ({ url = '', method, baseURL, data, headers, params, timeout }) => {
   try {
     const response = await axios.request({ url, method, baseURL, data, headers, params, timeout });
+    response.data.status = true;
     return response.data;
   } catch (error) {
     if (error.response) toast.error(error.response.data?.message);

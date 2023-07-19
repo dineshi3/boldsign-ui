@@ -1,12 +1,73 @@
+import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import { Box, Flex, Text, Title } from '@mantine/core';
 import { Roboto } from '@next/font/google';
 
 import DocumentStatusWiseGroup from '@/components/DocumentStatusWiseGroup';
 
+import { request } from '@/services/request';
+
 const roboto = Roboto({ subsets: ['latin'], weight: ['100', '300', '400', '500', '700', '900'] });
 
 export default function Home() {
+
+  const mountRef = useRef();
+
+  const [documents, setDocuments] = useState([
+    {
+      status: 'WaitingForMe',
+      label: 'Waiting For Me',
+      list: null,
+      totalCount: 0,
+      bgColor: '#e9d8fd',
+      borderColor: '#6b46c1',
+    },
+    {
+      status: 'WaitingForOthers',
+      label: 'Waiting For Others',
+      list: null,
+      totalCount: 0,
+      bgColor: '#ddf3ff',
+      borderColor: '#2b6cb0',
+    },
+    { status: 'Completed', label: 'Completed', list: null, totalCount: 0, bgColor: '#eef2f7', borderColor: '#4a5568' },
+  ]);
+
+  useEffect(() => {
+    if (mountRef.current) return;
+    for (let document of documents) {
+      console.log('CALLED');
+      getStatusWiseDocuments(document.status);
+    }
+    mountRef.current = true;
+  }, []);
+
+  const getStatusWiseDocuments = async (status) => {
+    const requestConfig = {
+      method: 'get',
+      url: `/api/document-status`,
+      params: {
+        status,
+      },
+    };
+
+    const responseData = await request(requestConfig);
+
+    const prevStatus = [...documents];
+
+    const document = prevStatus.filter((document) => document.status == status)[0];
+
+    if (responseData.status) {
+      document.list = responseData.result;
+      document.totalCount = responseData.pageDetails?.totalRecordsCount;
+    } else {
+      document.list = [];
+      document.totalCount = 0;
+    }
+
+    setDocuments(prevStatus);
+  };
+
   return (
     <>
       <Head>
@@ -17,22 +78,17 @@ export default function Home() {
       </Head>
       <main className={roboto.className}>
         <Box>
-
           <Title order={1} size={24} weight={500} my={4}>
             Hi Dinesh,
           </Title>
 
-          <Text size={14} >
-            Here is a quick status summary of your currently active documents.
-          </Text>
+          <Text size={14}>Here is a quick status summary of your currently active documents.</Text>
 
           <Flex gap={16} mt={16}>
-            <DocumentStatusWiseGroup />
-            <DocumentStatusWiseGroup />
-            <DocumentStatusWiseGroup />
-
+            {documents.map((document) => (
+              <DocumentStatusWiseGroup key={document.status} {...document} />
+            ))}
           </Flex>
-
         </Box>
       </main>
     </>
