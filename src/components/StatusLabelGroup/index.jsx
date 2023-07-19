@@ -9,7 +9,7 @@ const StatusLabelGroup = ({ onStatusChange }) => {
   const [statuses, setStatuses] = useState([
     {
       label: 'All',
-      value: 'All',
+      value: 'None',
       color: '#e6efff',
       borderColor: '#3783ff',
       checked: true,

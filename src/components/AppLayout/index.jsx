@@ -6,7 +6,7 @@ import AppNavbar from '../AppNavbar';
 import AppHeader from '../AppHeader';
 import AppFooter from '../AppFooter';
 
-const authRoutes = ['signup', 'login', 'start', 'waiting-list'];
+const authRoutes = ['signup', 'login', 'start'];
 
 export default function AppLayout(props) {
   const { children } = props;
@@ -15,6 +15,8 @@ export default function AppLayout(props) {
   const [opened, setOpened] = useState(false);
 
   const commons = { opened, theme };
+
+  if(router.pathname.includes('e-sign')) return children;
 
   if (authRoutes.find((path) => router.pathname.includes(path))) return <>
     <AppHeader {...commons} onNavToggle={() => setOpened((prev) => !prev)} />

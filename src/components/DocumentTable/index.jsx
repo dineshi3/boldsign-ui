@@ -8,7 +8,7 @@ import { request } from '@/services/request';
 
 import StatusLabelGroup from '../StatusLabelGroup';
 
-export const DocumentTableContext = createContext({ documentStatus: 'All' });
+export const DocumentTableContext = createContext({ documentStatus: 'None' });
 
 const useGetDocuments = ({ columnFilterFns, columnFilters, globalFilter, sorting, pagination, documentStatus }) => {
   const fetchURL = new URL(
@@ -85,7 +85,7 @@ const DocumentTable = () => {
     pageIndex: 0,
     pageSize: 10,
   });
-  const [documentStatus, setDocumentStatus] = useState('All');
+  const [documentStatus, setDocumentStatus] = useState('None');
 
   const { data, isError, isFetching, isLoading, refetch } = useGetDocuments({
     columnFilterFns,
