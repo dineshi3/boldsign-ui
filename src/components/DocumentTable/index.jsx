@@ -1,27 +1,33 @@
-import { useEffect, useMemo, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
-import { ActionIcon, Box, Button, Menu, Text, Title, Tooltip } from '@mantine/core';
+import { ActionIcon, Box, Button, Container, Menu, Text, Title, Tooltip } from '@mantine/core';
 
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { IconRefresh } from '@tabler/icons-react';
 import { request } from '@/services/request';
 
-//custom react-query hook
-const useGetDocuments = ({ columnFilterFns, columnFilters, globalFilter, sorting, pagination }) => {
+import StatusLabelGroup from '../StatusLabelGroup';
 
-  const fetchURL = new URL('/api/documents', typeof window == 'undefined' ? 'http://localhost:3000' : window.location.origin);
+export const DocumentTableContext = createContext({ documentStatus: 'All' });
+
+const useGetDocuments = ({ columnFilterFns, columnFilters, globalFilter, sorting, pagination, documentStatus }) => {
+  const fetchURL = new URL(
+    '/api/documents',
+    typeof window == 'undefined' ? 'http://localhost:3000' : window.location.origin,
+  );
   fetchURL.searchParams.set('start', `${pagination.pageIndex * pagination.pageSize}`);
   fetchURL.searchParams.set('size', `${pagination.pageSize}`);
   fetchURL.searchParams.set('filters', JSON.stringify(columnFilters ?? []));
   fetchURL.searchParams.set('filterModes', JSON.stringify(columnFilterFns ?? {}));
   fetchURL.searchParams.set('globalFilter', globalFilter ?? '');
   fetchURL.searchParams.set('sorting', JSON.stringify(sorting ?? []));
-
+  fetchURL.searchParams.set('status', documentStatus);
+  
   return useQuery({
-    queryKey: ['documents', fetchURL.href], //refetch whenever the URL changes (columnFilters, globalFilter, sorting, pagination)
+    queryKey: ['documents', fetchURL.href],
     queryFn: () => request({ url: fetchURL.href }),
-    keepPreviousData: true, //useful for paginated queries by keeping data from previous pages on screen while fetching the next page
-    staleTime: 30_000, //don't refetch previously viewed pages until cache is more than 30 seconds old
+    keepPreviousData: true,
+    staleTime: 30_000,
   });
 };
 
@@ -79,6 +85,7 @@ const DocumentTable = () => {
     pageIndex: 0,
     pageSize: 10,
   });
+  const [documentStatus, setDocumentStatus] = useState('All');
 
   const { data, isError, isFetching, isLoading, refetch } = useGetDocuments({
     columnFilterFns,
@@ -86,6 +93,7 @@ const DocumentTable = () => {
     globalFilter,
     pagination,
     sorting,
+    documentStatus
   });
 
   //this will depend on your API response shape
@@ -133,7 +141,18 @@ const DocumentTable = () => {
     },
   });
 
-  return <MantineReactTable table={table} />;
+  const handleDocumentStausChange = (status) => {
+    setDocumentStatus(status);
+  };
+
+  return (
+    <DocumentTableContext.Provider value={{ documentStatus, setDocumentStatus }}>
+      <Box>
+        <StatusLabelGroup onStatusChange={handleDocumentStausChange} status={documentStatus} />
+        <MantineReactTable table={table} />
+      </Box>
+    </DocumentTableContext.Provider>
+  );
 };
 
 const queryClient = new QueryClient();

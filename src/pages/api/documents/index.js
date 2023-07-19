@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default async function handler(req, res) {
-  const { size = '10' } = req.query;
+  const { size = '10', status } = req.query;
   const start = req.query.start && parseInt(req.query.start) > 0 ? req.query.start : '10';
   try {
     const requestConfig = {
@@ -13,6 +13,7 @@ export default async function handler(req, res) {
       params: {
         PageSize: size,
         Page: parseInt(start) / parseInt(size),
+        Status: status
       },
     };
     const response = await axios.request(requestConfig);
