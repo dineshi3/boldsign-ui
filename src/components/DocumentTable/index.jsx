@@ -1,12 +1,16 @@
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
+import moment from 'moment';
 import { MantineReactTable, useMantineReactTable } from 'mantine-react-table';
-import { ActionIcon, Box, Button, Container, Menu, Text, Title, Tooltip } from '@mantine/core';
-
+import { ActionIcon, Box, Flex, Image, Text, Tooltip } from '@mantine/core';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { IconRefresh } from '@tabler/icons-react';
-import { request } from '@/services/request';
 
-import StatusLabelGroup from '../StatusLabelGroup';
+import { request } from '@/services/request';
+import StatusLabelGroup, { DOCUMENT_STATUS } from '../StatusLabelGroup';
+
+import TrendingUp from '@/assets/TrendingUp.svg';
+
+import styles from './styles.module.scss';
 
 export const DocumentTableContext = createContext({ documentStatus: 'None' });
 
@@ -22,7 +26,7 @@ const useGetDocuments = ({ columnFilterFns, columnFilters, globalFilter, sorting
   fetchURL.searchParams.set('globalFilter', globalFilter ?? '');
   fetchURL.searchParams.set('sorting', JSON.stringify(sorting ?? []));
   fetchURL.searchParams.set('status', documentStatus);
-  
+
   return useQuery({
     queryKey: ['documents', fetchURL.href],
     queryFn: () => request({ url: fetchURL.href }),
@@ -35,8 +39,8 @@ const DocumentTable = () => {
   const columns = useMemo(
     () => [
       {
-        accessorFn: (row) => row.messageTitle, //accessorFn used to join multiple data into a single cell
-        id: 'title', //id is still required when using accessorFn instead of accessorKey
+        accessorFn: (row) => row.messageTitle,
+        id: 'title',
         header: 'Title',
         size: 250,
         filterVariant: 'autocomplete',
@@ -44,41 +48,65 @@ const DocumentTable = () => {
           <Box
             sx={{
               display: 'flex',
-              alignItems: 'center',
-              gap: '16px',
+              flexDirection: 'column',
+              gap: '4px',
             }}
           >
             <span>{renderedCellValue}</span>
+            <Flex align={'center'} gap={4}>
+              <Image src={TrendingUp.src} width={16} height={16} alt='Trendingup ion' />
+              <Flex>
+                <Text c='dimmed' size={12}>
+                  To: &nbsp;
+                </Text>
+                <Text size={12}> {row.original.signerDetails.map((signer) => signer.signerName).join(',')} </Text>
+              </Flex>
+            </Flex>
           </Box>
         ),
       },
       {
         id: 'status',
-        accessorKey: 'status', //accessorKey used to define `data` column. `id` gets set to accessorKey automatically
-        enableClickToCopy: true,
+        accessorKey: 'status',
         header: 'Status',
         size: 300,
+        Cell: ({ row }) => {
+          const { status, signerDetails } = row.original;
+          const statusObj = DOCUMENT_STATUS[status];
+          const Icon = statusObj.icon;
+
+          const signed = signerDetails
+            .filter((signer) => signer.status == 'Completed')
+            .map((signer) => signer.signerName);
+          const unsigned = signerDetails
+            .filter((signer) => signer.status != 'Completed')
+            .map((signer) => signer.signerName);
+
+          return (
+            <Box className={styles.statusContainer}>
+              <Flex align={'center'} gap={4}>
+                {Icon && <Icon color={statusObj.primaryColor} width={16} height={16} />}
+                <Text>{statusObj.label}</Text>
+              </Flex>
+              {Boolean(signed.length) && <p>Signed: {signed.join(',')}</p>}
+              {Boolean(unsigned.length) && <p>Unsigned: {unsigned.join(',')}</p>}
+            </Box>
+          );
+        },
       },
       {
-        accessorFn: (row) => {
-          //convert to Date for sorting and filtering
-          const sDay = new Date(row.activityDate);
-          sDay.setHours(0, 0, 0, 0); // remove time from date (useful if filter by equals exact date)
-          return sDay;
-        },
         id: 'activityDate',
         header: 'Last Activity',
-        Cell: ({ cell }) => cell.getValue()?.toLocaleDateString(), //render Date as a string
-        Header: ({ column }) => <em>{column.columnDef.header}</em>, //custom header markup
+        Cell: ({ row }) => moment(row.original.activityDate).format('DD/MM/YYYY HH:MM A'),
       },
     ],
     [],
   );
 
-  //Manage MRT state that we want to pass to our API
   const [columnFilters, setColumnFilters] = useState([]);
-  const [columnFilterFns, setColumnFilterFns] = //filter modes
-    useState(Object.fromEntries(columns.map(({ accessorKey }) => [accessorKey, 'contains']))); //default to "contains" for all columns
+  const [columnFilterFns, setColumnFilterFns] = useState(
+    Object.fromEntries(columns.map(({ accessorKey }) => [accessorKey, 'contains'])),
+  ); //default to "contains" for all columns
   const [globalFilter, setGlobalFilter] = useState('');
   const [sorting, setSorting] = useState([]);
   const [pagination, setPagination] = useState({
@@ -93,10 +121,9 @@ const DocumentTable = () => {
     globalFilter,
     pagination,
     sorting,
-    documentStatus
+    documentStatus,
   });
 
-  //this will depend on your API response shape
   const fetchedUsers = data?.result ?? [];
   const totalRowCount = data?.pageDetails?.totalRecordsCount ?? 0;
 
@@ -158,7 +185,6 @@ const DocumentTable = () => {
 const queryClient = new QueryClient();
 
 const ExampleWithReactQueryProvider = () => (
-  //Put this with your other react-query providers near root of your app
   <QueryClientProvider client={queryClient}>
     <DocumentTable />
   </QueryClientProvider>

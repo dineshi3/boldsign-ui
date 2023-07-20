@@ -41,7 +41,6 @@ const AppNavbar = (props) => {
         <Link href={'/mydocuments'} passHref>
           <NavLink label='My Documents' active={state.active == 'MY_DOCUMENTS'} />
         </Link>
-        <NavLink label='Team Documents' active={state.active == 'TEAM_DOCUMENTS'} />
       </NavLink>
     </Navbar>
   );

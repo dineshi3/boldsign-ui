@@ -1,12 +1,12 @@
-import { Card, Image, Text, Badge, Button, Group, Box, Flex, Divider, LoadingOverlay } from '@mantine/core';
+import { Card, Image, Text, Group, Box, Flex, Divider, LoadingOverlay } from '@mantine/core';
+import Link from 'next/link';
 
 import PenIcon from '@/assets/PenIcon.svg';
 import TrendingDownIcon from '@/assets/TrendingDown.svg';
-import RightArrowIcon from '@/assets/RightArrow.svg';
+
+import RightArrow from '@/icons/RightArrow';
 
 import styles from './styles.module.scss';
-import Link from 'next/link';
-import RightArrow from '@/icons/RightArrow';
 
 const DocumentStatusWiseGroup = (props) => {
   const { label, totalCount, list } = props;

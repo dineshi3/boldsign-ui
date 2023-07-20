@@ -1,0 +1,13 @@
+.titleContainer {
+}
+
+.statusContainer {
+  p {
+    padding-left: 21px;
+    font-size: 12px;
+    color: #666e80;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
