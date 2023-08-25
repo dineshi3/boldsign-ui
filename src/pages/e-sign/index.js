@@ -6,7 +6,7 @@ const ESignPage = (props) => {
       <div>
         <iframe
           src={embededLink}
-          style={{ width: '100%', height: 'calc(100vh - 6px)', border: 'none' }}
+          style={{ width: '100%', height: '100%', border: 'none' }}
         />
       </div>
   );

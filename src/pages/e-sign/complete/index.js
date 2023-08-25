@@ -1,9 +1,9 @@
 
 const ESignPage = () => {
     return (
-        <h2 style={{textAlign: 'center'}}>
-            Great! you have signed this document
-        </h2>
+        <h4 style={{textAlign: 'center'}}>
+            Great! You have signed this document
+        </h4>
     );
   };
 
