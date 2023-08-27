@@ -1,3 +1,4 @@
+import styles from './styles.module.scss';
 
 const ESignPage = (props) => {
 
@@ -6,7 +7,7 @@ const ESignPage = (props) => {
       <div>
         <iframe
           src={embededLink}
-          style={{ width: '100%', height: '100%', border: 'none' }}
+          className={styles.iframeContainer}
         />
       </div>
   );
