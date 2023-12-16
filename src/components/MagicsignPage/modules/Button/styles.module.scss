@@ -1,0 +1,38 @@
+.btn {
+  font-weight: 600;
+  border-radius: 4px 4px 4px 4px;
+  padding: 10px 40px;
+  display: inline-block;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 3px;
+  text-align: center;
+  transition: all 0.3s;
+  border: none;
+  outline: none;
+}
+
+.btnPrimary {
+  font-family: Inter, Sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000;
+  background-color: #ffd000;
+  border-radius: 4px 4px 4px 4px;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.btnOutline {
+  color: #ffd000;
+  background: #ffffff00;
+  border: 1px solid #ffd000;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    font-size: 14px;
+    padding: 7px 40px;
+  }
+}

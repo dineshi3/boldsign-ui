@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "title": "Magicsign",
+    "description": "Magicsign Legal Platform"
+  },
+  "theme": {
+    "color": "orange"
+  },
+  "product": {
+    "id": "magicsign",
+    "name": "Magicsign"
+  },
+  "navbar": {
+    "icon": {
+      "src": "/assets/magicsign/logo-no-background.svg",
+      "alt": "magicsign",
+      "width": "170"
+    }
+  },
+  "banner": {
+    "title": ["Prepare, Send, and E-Sign Docs", "Right from Your Inbox"],
+    "description": "Join 10,000+ Global Businesses, Save 12 Minutes per Agreement with MagicSign!",
+    "points": [
+      {
+        "text": "Unlimited documents"
+      },
+      {
+        "text": "No credit card required"
+      }
+    ],
+    "video": {
+      "src": "/assets/magicsign/magicsign_video_demo.mp4"
+    },
+    "customers": {
+      "title": "Magicsign is trusted by the world's leading companies",
+      "image": {
+        "desktop": {
+          "src": "/assets/magicsign/trusted-companies1.webp",
+          "alt": "companies logo"
+        },
+        "mobile": {
+          "src": "/assets/magicsign/trusted-companies-mobile-v2.webp",
+          "alt": "companies logo"
+        }
+      }
+    }
+  },
+  "register": {
+    "label": "Made for Everyday People",
+    "title": "Send Your Document for Signing in Less Than a Minute",
+    "description": "MagicSign simplifies signing. Attach your document to an email, add stakeholders in CC, and let us handle the rest, enabling signing from your inbox.",
+    "image": {
+      "decoding": "async",
+      "width": "800",
+      "height": "293",
+      "src": "/assets/magicsign/send-document-webp.webp",
+      "alt": "send-document for singing"
+    },
+    "button": {
+      "text": "Create Free Account"
+    }
+  },
+  "steps": {
+    "title": "How to Get Started",
+    "steps": [
+      "Send your document to support@magicsign.vakilsearch.com.",
+      "Both the signer and the owner will receive email notifications, and you can track the document's progress.",
+      "Magicsign will send copies to both individuals."
+    ]
+  },
+  "integration": {
+    "label": "FAST AND SCALABLE API",
+    "title": "Seamlessly integrate eSignatures into your apps",
+    "description": "We offer a comprehensive REST API that lets you initiate, track, and fulfill signature requests from within your own applications. Our APIs have been built from the ground up to be scalable to easily handle millions of documents when required.",
+    "image": {
+      "decoding": "async",
+      "src": "/assets/magicsign/code-window.webp",
+      "alt": "Code Window"
+    },
+    "buttons": {
+      "sandbox": {
+        "text": "Get free sandbox access"
+      },
+      "learnMore": {
+        "text": "Learn more"
+      }
+    },
+    "feature": {
+      "title": "Easily Add eSignatures",
+      "description": "We have an API that lets you start, track, and complete signature requests from your own apps. It can handle millions of documents.",
+      "features": [
+        {
+          "text": "Over 12 years of API development expertise at Magicsign"
+        },
+        {
+          "text": "Free developer sandbox access"
+        },
+        {
+          "text": "Fast API response time (<200 milliseconds)"
+        },
+        {
+          "text": "White labeling options"
+        },
+        {
+          "text": "Embedded sending and signing"
+        },
+        {
+          "text": "Webhooks support"
+        },
+        {
+          "text": "Integration into multi-tenant SaaS applications"
+        }
+      ]
+    }
+  },
+  "features": [
+    {
+      "label": "Multiple Link for Bulk Signing or Public Signing Link",
+      "title": "Secure Multiple Signatures with One Magicsign Link",
+      "description": "Integrate signature links seamlessly into your website or send them securely via email to multiple individuals for documents like account applications and event registrations. No technical expertise is necessary. It's a user-friendly solution for collecting signatures quickly and efficiently",
+      "image": {
+        "decoding": "async",
+        "src": "/assets/magicsign/bulk-link-or-public-signing-link.webp",
+        "alt": ""
+      },
+      "direction": "right"
+    },
+    {
+      "label": "Secured & Protected​",
+      "title": "Magicsign Follows U.S. and International eSignature Laws",
+      "description": "We keep track of important actions during the signing process and offer an easily accessible audit trail report. The final document is digitally signed to safeguard against any alterations in the future.",
+      "image": {
+        "decoding": "async",
+        "src": "/assets/magicsign/international-law-2.webp",
+        "alt": ""
+      },
+      "direction": "left"
+    },
+    {
+      "title": "Strong Data Security for Businesses",
+      "description": "We took data security seriously and made it a core design part. Your data is protected with strong encryption. It's so secure that even our staff can't access it for troubleshooting.",
+      "image": {
+        "decoding": "async",
+        "src": "/assets/magicsign/data-security.webp",
+        "alt": ""
+      },
+      "direction": "right"
+    },
+    {
+      "title": "Securing Your Data and Meeting Regulations",
+      "description": "We're certified with SOC 2® and GDPR compliant, showing our dedication to protecting your data's privacy, confidentiality, and integrity",
+      "image": {
+        "decoding": "async",
+        "src": "/assets/magicsign/security-and-compliance-logo.webp",
+        "alt": ""
+      },
+      "direction": "left"
+    }
+  ],
+  "reason": {
+    "label": "Why Choose Magicsign?",
+    "title": "Enterprise-grade product with all the bells and whistles at an affordable price",
+    "reasons": [
+      {
+        "color": "#f6e2bb",
+        "icon": {
+          "src": "/assets/magicsign/all-feature-included-webp.webp"
+        },
+        "title": "All-in-One Solution",
+        "description": "Access all features on every plan without constant upgrades."
+      },
+      {
+        "color": "#c4df9f",
+        "icon": {
+          "src": "/assets/magicsign/20-years-bussiness-webp.webp"
+        },
+        "title": "12 Years of Expertise",
+        "description": "Backed by 12+ years of experience in enterprise-grade software."
+      },
+      {
+        "title": "No Hidden Surprises",
+        "description": "No hidden limits, feature restrictions, or unexpected charges.",
+        "color": "#fac1d0",
+        "icon": {
+          "src": "/assets/magicsign/absolutely-no-tricks-webp.webp"
+        }
+      },
+      {
+        "title": "Outstanding Support",
+        "description": "Exceptional customer assistance, even on free plans.",
+        "color": "#bccbfb",
+        "icon": {
+          "src": "/assets/magicsign/excellent-customer-support-webp.webp"
+        }
+      }
+    ]
+  },
+  "companyOverview": {
+    "title": "Company Overview",
+    "statistics": [
+      {
+        "label": "Developers",
+        "value": "1M+",
+        "icon": {
+          "src": "/assets/magicsign/counter-developers-webp.webp",
+          "alt": "counter-developers"
+        }
+      },
+      {
+        "label": "Companies",
+        "value": "30K+",
+        "icon": {
+          "src": "/assets/magicsign/counter-companies-webp.webp",
+          "alt": "counter-companies"
+        }
+      },
+      {
+        "label": "Years in business",
+        "value": "22+",
+        "icon": {
+          "src": "/assets/magicsign/counter-year-in-business-webp.webp",
+          "alt": "counter-year-in-business"
+        }
+      },
+      {
+        "label": "Fortune 500 companies",
+        "value": "400+",
+        "icon": {
+          "src": "/assets/magicsign/counter-fortune-companies-webp.webp",
+          "alt": "counter-fortune-companies"
+        }
+      }
+    ]
+  },
+  "finalSignup": {
+    "title": "Get Your Free MagicSign Account Now!",
+    "points": [
+      {
+        "text": "Unlimited documents"
+      },
+      {
+        "text": "No credit card required"
+      }
+    ]
+  }
+}

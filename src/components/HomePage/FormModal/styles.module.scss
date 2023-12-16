@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .inputContainer {
+    margin-bottom: 2em;
+
+    p {
+      margin-bottom: 8px;
+    }
+  }
+
+  input {
+    width: 100%;
+    outline: none;
+    padding: 0.5rem;
+    border: 1px solid gray;
+
+    &.error {
+      border-color: red;
+    }
+  }
+
+  .closeIcon {
+    cursor: pointer;
+    align-self: flex-end;
+  }
+
+  .yellow {
+    background-color: #f6d949;
+    color: #000;
+  }
+
+  .orange {
+    background-color: #fe4901;
+    color: #fff;
+  }
+
+  .blue {
+    background-color: #007AFF;
+    color: #fff;
+  }
+
+}

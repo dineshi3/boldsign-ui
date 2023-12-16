@@ -1,0 +1,15 @@
+.label {
+  color: #007AFF;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 20px;
+  letter-spacing: 1.2px;
+
+  @media (max-width: 768px) {
+    & {
+      font-size: 14px;
+      line-height: 16.8px;
+    }
+  }
+}
